@@ -3,9 +3,8 @@ import { View, Text, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import DateTimePicker, {
-  DateTimePickerEvent,
+  DateTimePickerChangeEvent,
 } from "@react-native-community/datetimepicker";
-
 import { Button } from "@/components/Button";
 import { plants } from "@/utils/plants";
 
@@ -16,14 +15,14 @@ export default function PlantDetail() {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showPicker, setShowPicker] = useState(Platform.OS === "ios");
 
-  function handleChangeTime(event: DateTimePickerEvent, date?: Date) {
-    if (Platform.OS === "android") {
-      setShowPicker(false);
-    }
-    if (date) {
-      setSelectedTime(date);
-    }
+  function handleChangeTime(event: DateTimePickerChangeEvent, date: Date) {
+  if (Platform.OS === "android") {
+    setShowPicker(false);
   }
+  if (date) {
+    setSelectedTime(date);
+  }
+}
 
   function handleRegister() {
     router.push({
@@ -73,12 +72,12 @@ export default function PlantDetail() {
       )}
 
       {showPicker && (
-        <DateTimePicker
-          value={selectedTime}
-          mode="time"
-          is24Hour
-          onChange={handleChangeTime}
-        />
+<DateTimePicker
+  value={selectedTime}
+  mode="time"
+  is24Hour
+  onValueChange={handleChangeTime}
+/>
       )}
 
       <View className="mt-auto mb-8">
