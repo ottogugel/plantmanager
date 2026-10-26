@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
+import { useAuth } from "@/contexts/AuthContext";
 
 import { EnvironmentButton } from "@/components/EnvironmentButton";
 import { PlantCardPrimary } from "@/components/PlantCardPrimary";
@@ -9,7 +10,7 @@ import { environments } from "@/utils/environments";
 import { plants } from "@/utils/plants";
 
 export default function PlantSelect() {
-  const { name } = useLocalSearchParams<{ name: string }>();
+  const { user } = useAuth();
   const [selectedEnv, setSelectedEnv] = useState("all");
 
   const filteredPlants =
@@ -30,7 +31,7 @@ export default function PlantSelect() {
         <View className="flex-row items-center justify-between mb-6">
           <Text className="text-2xl font-bold text-gray-800">
             Olá,{"\n"}
-            {name ?? "visitante"}
+            {user?.displayName ?? "visitante"}
           </Text>
           <View className="w-12 h-12 rounded-full bg-green-light items-center justify-center">
             <Text className="text-xl">🙂</Text>

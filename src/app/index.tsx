@@ -20,9 +20,9 @@ export default function Welcome() {
           Nós cuidamos de lembrar você sempre que precisar.
         </Text>
 
-        <Pressable
-          onPress={() => router.push("/user-identification")}
-          className="bg-green-main w-14 h-14 rounded-2xl items-center justify-center active:opacity-80"
+      <Pressable
+        onPress={() => router.push("/login")}
+        className="bg-green-main w-14 h-14 rounded-full items-center justify-center active:opacity-80"
         >
           <Text className="text-white text-2xl">→</Text>
         </Pressable>

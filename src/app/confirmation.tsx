@@ -1,24 +1,23 @@
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router, useLocalSearchParams } from "expo-router";
 import { Button } from "@/components/Button";
+import { useAuth } from "@/contexts/AuthContext";
+import { router } from "expo-router";
 
 export default function Confirmation() {
-  const { name } = useLocalSearchParams<{ name: string }>();
 
-function handleStart() {
-  router.push({
-    pathname: "/plant-select",
-    params: { name },
-  });
-}
+  function handleStart() {
+    router.push("/plant-select");
+  }
 
+  const { user } = useAuth();
+  
   return (
     <SafeAreaView className="flex-1 bg-white items-center justify-center px-8">
       <Text className="text-7xl mb-6">😁</Text>
 
       <Text className="text-2xl font-bold text-gray-800 mb-3">
-        Prontinho{name ? `, ${name}` : ""}
+        Prontinho{user?.displayName ? `, ${user.displayName}` : ""}
       </Text>
 
       <Text className="text-gray-600 text-center text-base mb-10">
